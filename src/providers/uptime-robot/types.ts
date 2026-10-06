@@ -9,12 +9,13 @@ const logSchema = z.object({
   dateGMTISO: z.string(),
   time: z.number(),
   timezone: z.string(),
-  reason: z
-    .object({
+  reason: z.union([
+    z.object({
       code: z.union([z.string(), z.number()]),
       detail: z.object({ short: z.string().optional() }).loose(),
-    })
-    .loose(),
+    }).loose(),
+    z.array(z.unknown()),
+  ]),
 })
 
 export const publicMonitorResponseSchema = z

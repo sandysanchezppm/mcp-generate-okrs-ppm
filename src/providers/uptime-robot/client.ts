@@ -64,6 +64,7 @@ function getMonthPrefix(date: Date): string {
 function getIncidentCause(
   reason: PublicMonitorResponse["monitor"]["logs"][number]["reason"]
 ): string {
+  if (Array.isArray(reason)) return "Unknown"
   const detail = reason.detail.short?.trim()
   return detail ? `${reason.code}: ${detail}` : String(reason.code)
 }
